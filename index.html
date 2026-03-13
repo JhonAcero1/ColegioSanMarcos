@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colegio San Marcos — Formando el Futuro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── VARIABLES ─────────────────────────────────────── */
+    :root {
+      --navy:   #0d1b2a;
+      --gold:   #c9a84c;
+      --cream:  #f5f0e8;
+      --white:  #ffffff;
+      --gray:   #6b7280;
+      --light:  #f9f7f4;
+      --border: rgba(201,168,76,0.25);
+      --shadow: 0 8px 40px rgba(13,27,42,0.10);
+    }
+
+    /* ─── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5vw;
+      background: rgba(13,27,42,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: .75rem;
+      text-decoration: none;
+    }
+    .nav-logo .crest {
+      width: 38px; height: 38px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--gold);
+    }
+    .nav-logo span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 600;
+      color: var(--white);
+      letter-spacing: .04em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: .82rem; font-weight: 400;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO / SLIDESHOW ───────────────────────────────── */
+    #inicio {
+      position: relative; height: 100vh;
+      overflow: hidden;
+    }
+    .slides {
+      position: absolute; inset: 0;
+    }
+    .slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      background-size: cover;
+      background-position: center;
+    }
+    /* ── AÑADE AQUÍ TUS RUTAS DE IMAGEN ── */
+    .slide:nth-child(1) { background-image: url('imag11.jpg'); }
+    .slide:nth-child(2) { background-image: url('imag.webp'); }
+    .slide:nth-child(3) { background-image: url('imag3.jpg'); }
+    .slide:nth-child(4) { background-image: url('imag4.jpg'); }
+    /* ──────────────────────────────────── */
+    .slide.active { opacity: 1; }
+    .slide::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,27,42,.45) 0%,
+        rgba(13,27,42,.60) 60%,
+        rgba(13,27,42,.85) 100%
+      );
+    }
+
+    /* Fallback color si no hay imagen */
+    #inicio .slides::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 100%);
+      z-index: -1;
+    }
+
+    .hero-content {
+      position: relative; z-index: 10;
+      height: 100%; display: flex;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .hero-eyebrow {
+      font-size: .75rem; font-weight: 500;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      animation: fadeUp .9s ease both;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--white);
+      animation: fadeUp .9s .15s ease both;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      margin-top: 1.4rem;
+      font-size: 1rem; font-weight: 300;
+      color: rgba(255,255,255,.72);
+      max-width: 500px; line-height: 1.7;
+      animation: fadeUp .9s .3s ease both;
+    }
+    .hero-cta {
+      margin-top: 2.4rem;
+      display: inline-block;
+      padding: .85rem 2.4rem;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-size: .8rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .3s, color .3s;
+      animation: fadeUp .9s .45s ease both;
+    }
+    .hero-cta:hover { background: var(--gold); color: var(--navy); }
+
+    /* Dots */
+    .slide-dots {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 10; display: flex; gap: .6rem;
+    }
+    .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,.35);
+      cursor: pointer; transition: background .3s, transform .3s;
+    }
+    .dot.active { background: var(--gold); transform: scale(1.3); }
+
+    /* ─── SECTIONS COMMON ────────────────────────────────── */
+    section { padding: 6rem 5vw; }
+    .section-label {
+      font-size: .7rem; font-weight: 500;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .7rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300; line-height: 1.2;
+      color: var(--navy);
+    }
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--gold);
+      margin: 1.6rem 0;
+    }
+
+    /* ─── NOSOTROS ────────────────────────────────────────── */
+    #nosotros { background: var(--white); }
+    .nosotros-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2px;
+      margin-top: 3.5rem;
+    }
+    .mv-card {
+      background: var(--light);
+      padding: 2.8rem 2.2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s;
+    }
+    .mv-card:hover { transform: translateY(-4px); }
+    .mv-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .mv-card:hover::before { transform: scaleX(1); }
+    .mv-icon {
+      font-size: 1.8rem; margin-bottom: 1.2rem;
+      display: block;
+    }
+    .mv-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--navy); margin-bottom: .9rem;
+    }
+    .mv-card p {
+      font-size: .88rem; line-height: 1.75;
+      color: var(--gray);
+    }
+    .valores-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: .5rem;
+      margin-top: .5rem;
+    }
+    .valores-list li {
+      font-size: .88rem; color: var(--gray);
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .valores-list li::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+
+    /* ─── NOTICIAS ────────────────────────────────────────── */
+    #noticias { background: var(--navy); }
+    #noticias .section-title { color: var(--white); }
+    #noticias .section-label { color: var(--gold); }
+    .noticias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .noticia-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(201,168,76,.2);
+      padding: 2rem;
+      transition: background .3s, border-color .3s;
+      position: relative;
+    }
+    .noticia-card:hover {
+      background: rgba(201,168,76,.08);
+      border-color: rgba(201,168,76,.45);
+    }
+    .noticia-meta {
+      display: flex; align-items: center; gap: .7rem;
+      margin-bottom: 1rem;
+    }
+    .noticia-tag {
+      font-size: .65rem; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,.12);
+      padding: .25rem .7rem;
+      border: 1px solid rgba(201,168,76,.3);
+    }
+    .noticia-date {
+      font-size: .75rem; color: rgba(255,255,255,.4);
+    }
+    .noticia-autor {
+      font-size: .7rem; color: rgba(255,255,255,.3);
+      margin-top: .5rem; letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .noticia-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--white); margin-bottom: .7rem;
+      line-height: 1.3;
+    }
+    .noticia-card p {
+      font-size: .84rem; line-height: 1.7;
+      color: rgba(255,255,255,.55);
+    }
+
+    /* ─── CONTACTO ────────────────────────────────────────── */
+    #contacto { background: var(--cream); }
+    .contacto-inner {
+      max-width: 600px;
+    }
+    .contact-trigger {
+      display: inline-flex; align-items: center; gap: .7rem;
+      margin-top: 2rem;
+      padding: .95rem 2.2rem;
+      background: var(--navy);
+      color: var(--white);
+      font-size: .82rem; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; border: none;
+      transition: background .3s;
+    }
+    .contact-trigger:hover { background: #1a3a5c; }
+    .contact-trigger svg { width: 16px; height: 16px; }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(13,27,42,.65);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s;
+      padding: 1rem;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--white);
+      width: 100%; max-width: 520px;
+      padding: 2.8rem;
+      transform: translateY(20px);
+      transition: transform .35s;
+      position: relative;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 1.2rem; right: 1.4rem;
+      background: none; border: none;
+      font-size: 1.4rem; cursor: pointer;
+      color: var(--gray); transition: color .2s;
+    }
+    .modal-close:hover { color: var(--navy); }
+    .modal h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 600;
+      color: var(--navy); margin-bottom: .4rem;
+    }
+    .modal p.sub {
+      font-size: .84rem; color: var(--gray);
+      margin-bottom: 2rem; line-height: 1.6;
+    }
+    .form-group { margin-bottom: 1.3rem; }
+    .form-group label {
+      display: block;
+      font-size: .72rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--navy); margin-bottom: .45rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      border: 1.5px solid #e0dbd3;
+      background: var(--light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem; color: var(--navy);
+      outline: none;
+      transition: border-color .25s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn-submit {
+      width: 100%;
+      padding: .95rem;
+      background: var(--navy);
+      color: var(--white);
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      transition: background .3s;
+    }
+    .btn-submit:hover { background: var(--gold); }
+    .form-success {
+      display: none;
+      text-align: center; padding: 2rem 0;
+    }
+    .form-success .check { font-size: 2.5rem; margin-bottom: 1rem; }
+    .form-success h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: var(--navy); margin-bottom: .5rem;
+    }
+    .form-success p { font-size: .88rem; color: var(--gray); }
+
+    /* Info aside */
+    .contacto-info {
+      margin-top: 3rem;
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+    }
+    .info-item { display: flex; align-items: flex-start; gap: .8rem; }
+    .info-icon {
+      width: 36px; height: 36px;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: .9rem;
+    }
+    .info-item p { font-size: .82rem; color: var(--gray); line-height: 1.6; }
+    .info-item strong { color: var(--navy); display: block; font-size: .78rem;
+      letter-spacing: .06em; text-transform: uppercase; margin-bottom: .15rem; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      padding: 2.5rem 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    footer p {
+      font-size: .78rem; color: rgba(255,255,255,.35);
+      letter-spacing: .05em;
+    }
+    footer .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; color: var(--gold);
+    }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nosotros-grid { grid-template-columns: 1fr; gap: .5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav>
+  <a href="#inicio" class="nav-logo">
+    <div class="crest">SM</div>
+    <span>Colegio San Marcos</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#noticias">Noticias</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="inicio">
+  <div class="slides">
+    <!--
+      INSTRUCCIONES PARA IMÁGENES:
+      Coloca tus imágenes en una carpeta "img/" junto al index.html
+      y actualiza los nombres de archivo abajo (slide1.jpg, slide2.jpg, etc.)
+      Tamaño recomendado: 1920×1080 px, formato JPG optimizado.
+    -->
+    <div class="slide active"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Fundado en 1985 · Lima, Perú</p>
+    <h1 class="hero-title">Formando líderes<br>para el <em>futuro</em></h1>
+    <p class="hero-sub">
+      Una comunidad educativa comprometida con la excelencia académica,
+      los valores humanos y el desarrollo integral de cada estudiante.
+    </p>
+    <a href="#nosotros" class="hero-cta">Conoce el colegio</a>
+  </div>
+
+  <div class="slide-dots" id="dots"></div>
+</section>
+
+<!-- ══════════════ NOSOTROS ══════════════ -->
+<section id="nosotros">
+  <p class="section-label reveal">Quiénes somos</p>
+  <h2 class="section-title reveal">Nuestra identidad<br>institucional</h2>
+  <div class="divider reveal"></div>
+
+  <div class="nosotros-grid">
+
+    <div class="mv-card reveal">
+      <span class="mv-icon">🎯</span>
+      <h3>Misión</h3>
+      <p>
+        Brindar una educación de calidad que forme personas íntegras, críticas
+        y comprometidas con su entorno, mediante una propuesta pedagógica
+        innovadora que articula el conocimiento académico con el desarrollo
+        de habilidades para la vida.
+      </p>
+    </div>
+
+    <div class="mv-card reveal">
+      <span class="mv-icon">🔭</span>
+      <h3>Visión</h3>
+      <p>
+        Ser reconocidos al 2030 como una institución educativa líder en
+        formación integral, destacada por la excelencia de sus egresados,
+        la innovación en sus prácticas y su impacto positivo en la sociedad.
+      </p>
+    </div>
+
+    <div class="mv-card reveal">
+      <span class="mv-icon">⭐</span>
+      <h3>Valores</h3>
+      <ul class="valores-list">
+        <li>Respeto y tolerancia</li>
+        <li>Responsabilidad y disciplina</li>
+        <li>Honestidad e integridad</li>
+        <li>Solidaridad y trabajo en equipo</li>
+        <li>Innovación y pensamiento crítico</li>
+        <li>Compromiso con la excelencia</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ NOTICIAS ══════════════ -->
+<section id="noticias">
+  <p class="section-label">Últimas noticias</p>
+  <h2 class="section-title">Anuncios y<br>novedades</h2>
+  <div class="divider" style="background:rgba(201,168,76,.5)"></div>
+
+  <div class="noticias-grid">
+
+    <!-- NOTICIA 1 -->
+    <article class="noticia-card reveal">
+      <div class="noticia-meta">
+        <span class="noticia-tag">Académico</span>
+        <span class="noticia-date">10 Mar 2025</span>
+      </div>
+      <h4>Inicio del año escolar 2025 con nuevo plan curricular</h4>
+      <p>
+        El colegio San Marcos inicia el año académico con una propuesta
+        curricular renovada que incorpora competencias digitales y
+        pensamiento computacional en todos los niveles.
+      </p>
+      <p class="noticia-autor">Por: Lic. Ana Torres — Dirección Académica</p>
+    </article>
+
+    <!-- NOTICIA 2 -->
+    <article class="noticia-card reveal">
+      <div class="noticia-meta">
+        <span class="noticia-tag">Evento</span>
+        <span class="noticia-date">5 Mar 2025</span>
+      </div>
+      <h4>Feria de Ciencias 2025: inscripciones abiertas</h4>
+      <p>
+        Este año la Feria de Ciencias se realizará el 15 de mayo. Los
+        estudiantes de 3.° a 5.° de secundaria pueden inscribir sus
+        proyectos hasta el 1 de abril en la secretaría académica.
+      </p>
+      <p class="noticia-autor">Por: Prof. Carlos Ríos — Área de Ciencias</p>
+    </article>
+
+    <!-- NOTICIA 3 -->
+    <article class="noticia-card reveal">
+      <div class="noticia-meta">
+        <span class="noticia-tag">Deportes</span>
+        <span class="noticia-date">28 Feb 2025</span>
+      </div>
+      <h4>Selección de fútbol clasificó al campeonato interescolar</h4>
+      <p>
+        Nuestra selección de fútbol masculino clasificó entre los ocho
+        mejores equipos del distrito tras una brillante actuación en
+        la fase clasificatoria del campeonato interescolar Lima 2025.
+      </p>
+      <p class="noticia-autor">Por: Prof. José Mendoza — Área de Deportes</p>
+    </article>
+
+    <!-- NOTICIA 4 -->
+    <article class="noticia-card reveal">
+      <div class="noticia-meta">
+        <span class="noticia-tag">Cultura</span>
+        <span class="noticia-date">20 Feb 2025</span>
+      </div>
+      <h4>Club de Teatro presenta obra «El Principito» en marzo</h4>
+      <p>
+        El Club de Teatro del colegio estrenará su adaptación de
+        «El Principito» el 22 de marzo en el auditorio principal.
+        La entrada es libre para toda la comunidad educativa.
+      </p>
+      <p class="noticia-autor">Por: Lic. María Quispe — Arte y Cultura</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ══════════════ CONTACTO ══════════════ -->
+<section id="contacto">
+  <div class="contacto-inner">
+    <p class="section-label reveal">Comunícate con nosotros</p>
+    <h2 class="section-title reveal">Contáctanos</h2>
+    <div class="divider reveal"></div>
+    <p class="reveal" style="font-size:.9rem;color:var(--gray);line-height:1.8;max-width:420px;">
+      ¿Tienes preguntas sobre admisiones, actividades o servicios?
+      Completa el formulario y nuestro equipo te responderá
+      a la brevedad posible.
+    </p>
+
+    <button class="contact-trigger reveal" onclick="openModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      Abrir formulario de contacto
+    </button>
+
+    <div class="contacto-info">
+      <div class="info-item reveal">
+        <div class="info-icon">📍</div>
+        <div>
+          <p><strong>Dirección</strong>Av. Los Álamos 345, Miraflores, Lima</p>
+        </div>
+      </div>
+      <div class="info-item reveal">
+        <div class="info-icon">📞</div>
+        <div>
+          <p><strong>Teléfono</strong>(01) 234-5678</p>
+        </div>
+      </div>
+      <div class="info-item reveal">
+        <div class="info-icon">✉️</div>
+        <div>
+          <p><strong>Correo</strong>info@colegiosanmarcos.edu.pe</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <span class="footer-brand">Colegio San Marcos</span>
+  <p>© 2025 Colegio San Marcos. Todos los derechos reservados.</p>
+  <p>Desplegado en Amazon EC2 · Apache HTTP Server</p>
+</footer>
+
+<!-- ══════════════ MODAL ══════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div id="formContent">
+      <h3>Formulario de contacto</h3>
+      <p class="sub">Completa los campos y te responderemos pronto.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" id="fname" placeholder="Tu nombre" />
+        </div>
+        <div class="form-group">
+          <label>Apellido</label>
+          <input type="text" id="lname" placeholder="Tu apellido" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" id="email" placeholder="correo@ejemplo.com" />
+      </div>
+
+      <div class="form-group">
+        <label>Motivo de contacto</label>
+        <select id="motivo">
+          <option value="">Selecciona una opción</option>
+          <option>Información sobre admisiones</option>
+          <option>Consulta académica</option>
+          <option>Actividades extracurriculares</option>
+          <option>Otro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea id="mensaje" placeholder="Escribe tu consulta aquí..."></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="submitForm()">Enviar mensaje</button>
+    </div>
+
+    <div class="form-success" id="formSuccess">
+      <div class="check">✅</div>
+      <h4>¡Mensaje enviado!</h4>
+      <p>Gracias por contactarnos. Te responderemos dentro de las próximas 24 horas hábiles.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ JS ══════════════ -->
+<script>
+  /* ── SLIDESHOW ── */
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  let current = 0, timer;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    resetTimer();
+  }
+
+  function next() { goTo((current + 1) % slides.length); }
+  function resetTimer() { clearInterval(timer); timer = setInterval(next, 5000); }
+  resetTimer();
+
+  /* ── SCROLL REVEAL ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+
+  /* ── MODAL ── */
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+  function submitForm() {
+    const req = ['fname','lname','email','motivo'];
+    for (const id of req) {
+      if (!document.getElementById(id).value.trim()) {
+        document.getElementById(id).focus();
+        document.getElementById(id).style.borderColor = '#e05252';
+        setTimeout(() => document.getElementById(id).style.borderColor = '', 1500);
+        return;
+      }
+    }
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    setTimeout(closeModal, 2800);
+    setTimeout(() => {
+      document.getElementById('formContent').style.display = 'block';
+      document.getElementById('formSuccess').style.display = 'none';
+      ['fname','lname','email','motivo','mensaje'].forEach(id => document.getElementById(id).value = '');
+    }, 3200);
+  }
+</script>
+</body>
+</html>
