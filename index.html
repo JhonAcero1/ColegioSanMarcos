@@ -83,12 +83,10 @@
       background-size: cover;
       background-position: center;
     }
-    /* ── AÑADE AQUÍ TUS RUTAS DE IMAGEN ── */
-    .slide:nth-child(1) { background-image: url('imag11.jpg'); }
+    .slide:nth-child(1) { background-image: url('imag9.jpg'); }
     .slide:nth-child(2) { background-image: url('imag.webp'); }
     .slide:nth-child(3) { background-image: url('imag3.jpg'); }
     .slide:nth-child(4) { background-image: url('imag4.jpg'); }
-    /* ──────────────────────────────────── */
     .slide.active { opacity: 1; }
     .slide::after {
       content: '';
@@ -101,7 +99,6 @@
       );
     }
 
-    /* Fallback color si no hay imagen */
     #inicio .slides::before {
       content: '';
       position: absolute; inset: 0;
@@ -153,7 +150,6 @@
     }
     .hero-cta:hover { background: var(--gold); color: var(--navy); }
 
-    /* Dots */
     .slide-dots {
       position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
       z-index: 10; display: flex; gap: .6rem;
@@ -237,6 +233,53 @@
       background: var(--gold); flex-shrink: 0;
     }
 
+    /* ─── SERVICIOS ───────────────────────────────────────── */
+    #servicios { background: var(--light); }
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .servicio-card {
+      background: var(--white);
+      border: 1px solid rgba(201,168,76,.18);
+      padding: 2.4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .servicio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: rgba(201,168,76,.5);
+    }
+    .servicio-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .servicio-card:hover::after { transform: scaleX(1); }
+    .servicio-icon {
+      width: 52px; height: 52px;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.4rem;
+    }
+    .servicio-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--navy); margin-bottom: .7rem;
+    }
+    .servicio-card p {
+      font-size: .85rem; line-height: 1.75;
+      color: var(--gray);
+    }
+
     /* ─── NOTICIAS ────────────────────────────────────────── */
     #noticias { background: var(--navy); }
     #noticias .section-title { color: var(--white); }
@@ -291,9 +334,14 @@
 
     /* ─── CONTACTO ────────────────────────────────────────── */
     #contacto { background: var(--cream); }
-    .contacto-inner {
-      max-width: 600px;
+    .contacto-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
     }
+    .contacto-left {}
     .contact-trigger {
       display: inline-flex; align-items: center; gap: .7rem;
       margin-top: 2rem;
@@ -307,6 +355,68 @@
     }
     .contact-trigger:hover { background: #1a3a5c; }
     .contact-trigger svg { width: 16px; height: 16px; }
+    .contacto-info {
+      margin-top: 2rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .info-item { display: flex; align-items: flex-start; gap: .8rem; }
+    .info-icon {
+      width: 36px; height: 36px;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: .9rem;
+    }
+    .info-item p { font-size: .82rem; color: var(--gray); line-height: 1.6; }
+    .info-item strong { color: var(--navy); display: block; font-size: .78rem;
+      letter-spacing: .06em; text-transform: uppercase; margin-bottom: .15rem; }
+
+    /* ── MAPA ── */
+    .contacto-mapa {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .mapa-label {
+      font-size: .7rem; font-weight: 500;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .8rem;
+    }
+    .mapa-imagen {
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 16/9;
+      min-height: 200px;
+      height: auto;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      display: block;
+    }
+    /* Placeholder visible cuando no hay imagen */
+    .mapa-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #e8e2d8;
+      border: 2px dashed rgba(201,168,76,.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      color: var(--gray);
+    }
+    .mapa-placeholder span { font-size: 2rem; }
+    .mapa-placeholder p {
+      font-size: .78rem; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gray);
+      text-align: center; max-width: 180px; line-height: 1.5;
+    }
+    /* Instrucción visible solo en edición */
+    .mapa-instruccion {
+      margin-top: .6rem;
+      font-size: .75rem; color: var(--gray);
+      font-style: italic; line-height: 1.5;
+    }
 
     /* Modal */
     .modal-overlay {
@@ -391,23 +501,6 @@
     }
     .form-success p { font-size: .88rem; color: var(--gray); }
 
-    /* Info aside */
-    .contacto-info {
-      margin-top: 3rem;
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-    }
-    .info-item { display: flex; align-items: flex-start; gap: .8rem; }
-    .info-icon {
-      width: 36px; height: 36px;
-      background: var(--navy);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      font-size: .9rem;
-    }
-    .info-item p { font-size: .82rem; color: var(--gray); line-height: 1.6; }
-    .info-item strong { color: var(--navy); display: block; font-size: .78rem;
-      letter-spacing: .06em; text-transform: uppercase; margin-bottom: .15rem; }
-
     /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
       background: var(--navy);
@@ -437,6 +530,9 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .contacto-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
     @media (max-width: 768px) {
       .nosotros-grid { grid-template-columns: 1fr; gap: .5rem; }
       .form-row { grid-template-columns: 1fr; }
@@ -455,6 +551,7 @@
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
     <li><a href="#noticias">Noticias</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -463,12 +560,6 @@
 <!-- ══════════════ HERO ══════════════ -->
 <section id="inicio">
   <div class="slides">
-    <!--
-      INSTRUCCIONES PARA IMÁGENES:
-      Coloca tus imágenes en una carpeta "img/" junto al index.html
-      y actualiza los nombres de archivo abajo (slide1.jpg, slide2.jpg, etc.)
-      Tamaño recomendado: 1920×1080 px, formato JPG optimizado.
-    -->
     <div class="slide active"></div>
     <div class="slide"></div>
     <div class="slide"></div>
@@ -491,11 +582,10 @@
 <!-- ══════════════ NOSOTROS ══════════════ -->
 <section id="nosotros">
   <p class="section-label reveal">Quiénes somos</p>
-  <h2 class="section-title reveal">Nuestra identidad<br>institucional</h2>
+  <h2 class="section-title reveal">Nuestra identidad</h2>
   <div class="divider reveal"></div>
 
   <div class="nosotros-grid">
-
     <div class="mv-card reveal">
       <span class="mv-icon">🎯</span>
       <h3>Misión</h3>
@@ -506,7 +596,6 @@
         de habilidades para la vida.
       </p>
     </div>
-
     <div class="mv-card reveal">
       <span class="mv-icon">🔭</span>
       <h3>Visión</h3>
@@ -516,7 +605,6 @@
         la innovación en sus prácticas y su impacto positivo en la sociedad.
       </p>
     </div>
-
     <div class="mv-card reveal">
       <span class="mv-icon">⭐</span>
       <h3>Valores</h3>
@@ -528,6 +616,106 @@
         <li>Innovación y pensamiento crítico</li>
         <li>Compromiso con la excelencia</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SERVICIOS ══════════════ -->
+<section id="servicios">
+  <p class="section-label reveal">Lo que ofrecemos</p>
+  <h2 class="section-title reveal">Nuestros<br>servicios</h2>
+  <div class="divider reveal"></div>
+
+  <div class="servicios-grid">
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">📚</div>
+      <h3>Educación Inicial</h3>
+      <p>
+        Programa educativo para niños de 3 a 5 años, enfocado en el desarrollo
+        de habilidades cognitivas, sociales y emocionales a través del juego
+        y la exploración creativa.
+      </p>
+    </div>
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">🏫</div>
+      <h3>Educación Primaria</h3>
+      <p>
+        Formación académica integral para estudiantes de 1.° a 6.° grado,
+        con énfasis en comprensión lectora, matemáticas, ciencias y el
+        desarrollo de valores ciudadanos.
+      </p>
+    </div>
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">🎓</div>
+      <h3>Educación Secundaria</h3>
+      <p>
+        Plan curricular completo para estudiantes de 1.° a 5.° de secundaria,
+        orientado a la excelencia académica y la preparación para la educación
+        superior con talleres de orientación vocacional.
+      </p>
+    </div>
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">💻</div>
+      <h3>Laboratorio de Cómputo</h3>
+      <p>
+        Instalaciones tecnológicas de última generación con acceso a internet
+        de alta velocidad, software educativo especializado y docentes
+        capacitados en programación y competencias digitales.
+      </p>
+    </div>
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">⚽</div>
+      <h3>Deportes y Recreación</h3>
+      <p>
+        Programas deportivos extracurriculares en fútbol, vóley, básquet y
+        atletismo. Contamos con losas deportivas, un gimnasio equipado y
+        docentes especializados en educación física.
+      </p>
+    </div>
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">🎨</div>
+      <h3>Arte y Cultura</h3>
+      <p>
+        Talleres de teatro, música, danza y artes plásticas disponibles para
+        todos los niveles. Fomentamos la expresión artística como herramienta
+        de desarrollo personal y trabajo en equipo.
+      </p>
+    </div>
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">🧠</div>
+      <h3>Psicología y Tutoría</h3>
+      <p>
+        Servicio de orientación psicopedagógica con profesionales certificados.
+        Brindamos acompañamiento emocional, soporte académico y tutorías
+        personalizadas para cada estudiante.
+      </p>
+    </div>
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">🍽️</div>
+      <h3>Comedor Escolar</h3>
+      <p>
+        Servicio de alimentación nutritiva supervisado por nutricionistas,
+        con menús balanceados diseñados para apoyar el rendimiento académico
+        y el bienestar físico de los estudiantes.
+      </p>
+    </div>
+
+    <div class="servicio-card reveal">
+      <div class="servicio-icon">🚌</div>
+      <h3>Transporte Escolar</h3>
+      <p>
+        Servicio de movilidad segura con unidades monitoreadas en tiempo real,
+        conductores certificados y rutas planificadas para cubrir las
+        principales zonas del distrito.
+      </p>
     </div>
 
   </div>
@@ -541,7 +729,6 @@
 
   <div class="noticias-grid">
 
-    <!-- NOTICIA 1 -->
     <article class="noticia-card reveal">
       <div class="noticia-meta">
         <span class="noticia-tag">Académico</span>
@@ -556,7 +743,6 @@
       <p class="noticia-autor">Por: Lic. Ana Torres — Dirección Académica</p>
     </article>
 
-    <!-- NOTICIA 2 -->
     <article class="noticia-card reveal">
       <div class="noticia-meta">
         <span class="noticia-tag">Evento</span>
@@ -571,7 +757,6 @@
       <p class="noticia-autor">Por: Prof. Carlos Ríos — Área de Ciencias</p>
     </article>
 
-    <!-- NOTICIA 3 -->
     <article class="noticia-card reveal">
       <div class="noticia-meta">
         <span class="noticia-tag">Deportes</span>
@@ -586,7 +771,6 @@
       <p class="noticia-autor">Por: Prof. José Mendoza — Área de Deportes</p>
     </article>
 
-    <!-- NOTICIA 4 -->
     <article class="noticia-card reveal">
       <div class="noticia-meta">
         <span class="noticia-tag">Cultura</span>
@@ -606,43 +790,63 @@
 
 <!-- ══════════════ CONTACTO ══════════════ -->
 <section id="contacto">
-  <div class="contacto-inner">
-    <p class="section-label reveal">Comunícate con nosotros</p>
-    <h2 class="section-title reveal">Contáctanos</h2>
-    <div class="divider reveal"></div>
-    <p class="reveal" style="font-size:.9rem;color:var(--gray);line-height:1.8;max-width:420px;">
-      ¿Tienes preguntas sobre admisiones, actividades o servicios?
-      Completa el formulario y nuestro equipo te responderá
-      a la brevedad posible.
-    </p>
+  <p class="section-label reveal">Comunícate con nosotros</p>
+  <h2 class="section-title reveal">Contáctanos</h2>
+  <div class="divider reveal"></div>
 
-    <button class="contact-trigger reveal" onclick="openModal()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-      Abrir formulario de contacto
-    </button>
+  <div class="contacto-layout">
 
-    <div class="contacto-info">
-      <div class="info-item reveal">
-        <div class="info-icon">📍</div>
-        <div>
-          <p><strong>Dirección</strong>Av. Los Álamos 345, Miraflores, Lima</p>
+    <!-- COLUMNA IZQUIERDA: info + botón -->
+    <div class="contacto-left">
+      <p class="reveal" style="font-size:.9rem;color:var(--gray);line-height:1.8;max-width:420px;">
+        ¿Tienes preguntas sobre admisiones, actividades o servicios?
+        Completa el formulario y nuestro equipo te responderá
+        a la brevedad posible.
+      </p>
+
+      <button class="contact-trigger reveal" onclick="openModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        Abrir formulario de contacto
+      </button>
+
+      <div class="contacto-info">
+        <div class="info-item reveal">
+          <div class="info-icon">📍</div>
+          <div>
+            <p><strong>Dirección</strong>Av. Los Álamos 345, Miraflores, Lima</p>
+          </div>
         </div>
-      </div>
-      <div class="info-item reveal">
-        <div class="info-icon">📞</div>
-        <div>
-          <p><strong>Teléfono</strong>(01) 234-5678</p>
+        <div class="info-item reveal">
+          <div class="info-icon">📞</div>
+          <div>
+            <p><strong>Teléfono</strong>(01) 234-5678</p>
+          </div>
         </div>
-      </div>
-      <div class="info-item reveal">
-        <div class="info-icon">✉️</div>
-        <div>
-          <p><strong>Correo</strong>info@colegiosanmarcos.edu.pe</p>
+        <div class="info-item reveal">
+          <div class="info-icon">✉️</div>
+          <div>
+            <p><strong>Correo</strong>info@colegiosanmarcos.edu.pe</p>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- URL de mapa -->
+    <div class="contacto-mapa reveal">
+      <p class="mapa-label">Cómo llegar</p>
+      
+      <img
+        src="imag7.webp"
+        alt="Ubicación del Colegio San Marcos en Google Maps"
+        class="mapa-imagen"
+        onerror="this.style.display='none'; document.getElementById('mapaPlaceholder').style.display='flex';"
+      />
+
+      
+    </div>
+
   </div>
 </section>
 
@@ -650,7 +854,6 @@
 <footer>
   <span class="footer-brand">Colegio San Marcos</span>
   <p>© 2025 Colegio San Marcos. Todos los derechos reservados.</p>
-  <p>Desplegado en Amazon EC2 · Apache HTTP Server</p>
 </footer>
 
 <!-- ══════════════ MODAL ══════════════ -->
